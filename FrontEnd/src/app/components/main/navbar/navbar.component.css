@@ -1,0 +1,17 @@
+#logo{
+    width: 110px;
+    box-shadow: 1px -2px 25px -10px rgba(0,0,0,0.75);
+    border-radius: 5px;
+}
+
+p{
+    margin: 0 !important;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.buttons{
+    margin-left: 10px;
+}
