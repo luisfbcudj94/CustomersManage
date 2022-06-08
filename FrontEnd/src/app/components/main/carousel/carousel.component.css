@@ -1,0 +1,42 @@
+
+#carouselExampleInterval{
+    
+}
+
+.carousel-item{
+    background-color: rgb(243, 243, 243);
+    height: 300px !important;
+}
+
+
+
+.carousel-item{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+
+    
+}
+
+#uno{
+    background-color: black;
+    background-repeat:repeat; 
+    opacity: 0.5;
+}   
+
+#dos{
+    background-color: black;
+    background-repeat:repeat; 
+    opacity: 0.5;
+}
+
+#tres{
+    background-color: black;
+    background-repeat:repeat; 
+    opacity: 0.5;
+}
+
+.carousel-item h1,p{
+    color: rgb(255, 255, 255);
+}
+

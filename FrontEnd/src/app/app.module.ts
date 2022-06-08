@@ -17,6 +17,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MainComponent } from './components/main/main.component';
 import { NavbarComponent } from './components/main/navbar/navbar.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { CarouselComponent } from './components/main/carousel/carousel.component';
+import { ContenidoComponent } from './components/main/contenido/contenido.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     LoginComponent,
     MainComponent,
     NavbarComponent,
+    CarouselComponent,
+    ContenidoComponent,
+    
     
   ],
   imports: [
