@@ -20,4 +20,5 @@ p{
 
 mat-toolbar{
     background-color: #ffffff !important;
+    box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.75);
 }

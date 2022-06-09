@@ -45,6 +45,11 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/main']);
         this.loading = false;
         this.login.reset()
+
+        localStorage.setItem('NombreUsuario',data.user.nombreUsuario);
+        localStorage.setItem('Admin',data.user.admin);
+        localStorage.setItem('Customer',data.user.customer);
+        localStorage.setItem('TallerId',data.user.tallerId);
     }, error => {
       this.loading = false;
       console.log(error);

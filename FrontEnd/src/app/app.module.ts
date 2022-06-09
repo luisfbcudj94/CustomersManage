@@ -19,6 +19,11 @@ import { NavbarComponent } from './components/main/navbar/navbar.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { CarouselComponent } from './components/main/carousel/carousel.component';
 import { ContenidoComponent } from './components/main/contenido/contenido.component';
+import { ClientesComponent } from './components/clientes/clientes.component';
+import { MatTableModule } from '@angular/material/table'  
+import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -28,6 +33,8 @@ import { ContenidoComponent } from './components/main/contenido/contenido.compon
     NavbarComponent,
     CarouselComponent,
     ContenidoComponent,
+    ClientesComponent,
+    
     
     
   ],
@@ -44,7 +51,11 @@ import { ContenidoComponent } from './components/main/contenido/contenido.compon
     ReactiveFormsModule,
     HttpClientModule,
     MatProgressSpinnerModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatIconModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
