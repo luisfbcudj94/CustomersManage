@@ -31,3 +31,12 @@ h1{
 .buttons #agregarClientes{
     margin-left: 20px;
 }
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+    text-decoration: underline blue;
+}

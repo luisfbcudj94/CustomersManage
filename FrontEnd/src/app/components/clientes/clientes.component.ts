@@ -1,9 +1,11 @@
 import { Component, OnInit,AfterViewInit, ViewChild, TemplateRef} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsuarioAdd } from 'src/app/models/usuarioAdd';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-clientes',
@@ -15,11 +17,14 @@ import { UsuarioAdd } from 'src/app/models/usuarioAdd';
 
 export class ClientesComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = ['name', 'document', 'nombreUsuario','symbol'];
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
-  login: FormGroup;
+  customer: FormGroup;
   loading: boolean=false;
+
+  tallerId: number;
+  customers: UsuarioAdd[];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild('addCliente') addCliente: TemplateRef<any>;
@@ -31,27 +36,60 @@ export class ClientesComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               public dialog: MatDialog,
+              public dialogRef: MatDialogRef<ClientesComponent>,
+              private usuariosService: UsuariosService,
+              private toastr: ToastrService,
               ) {
-    this.login = this.fb.group({
+    this.customer = this.fb.group({
+      name: ['',Validators.required],
+      document: ['',Validators.required],
       usuario: ['',Validators.required],
       password: ['',Validators.required]
     });
    }
 
   ngOnInit(): void {
+    this.tallerId = +localStorage.getItem('TallerId');
+    console.log(this.tallerId);
+    this.getData();
+    
   }
 
-  agregarCliente(){
+  getData(){
+    this.usuariosService.getCustomers(this.tallerId).subscribe(data => {
+      this.customers = data;
+      console.log("customers:" ,this.customers[0]);
+    },err => {
+      console.log(err.error);
+    });
+  }
+
+  filtro(){
+  }
+  
+
+  agregarCliente(): void{
 
     const usuarioAdd:UsuarioAdd = {
-      nombreUsuario: this.login.value.usuario,
-      password: this.login.value.password,
+      nombre: this.customer.value.name,
+      documento: this.customer.value.document,
+      nombreUsuario: this.customer.value.usuario,
+      password: this.customer.value.password,
       admin: 0,
       customer: 1,
       tallerId: +localStorage.getItem('TallerId')
     };
 
-    console.log("Agregando clientes",usuarioAdd);
+    console.log("Cliente: ", usuarioAdd)
+    
+    this.usuariosService.newCustomer(usuarioAdd).subscribe(data => {
+      this.toastr.success("Cliente agregado con éxito.");
+      window.location.reload();
+      
+    },err =>{
+      console.log(err.error.message);
+      this.toastr.error(err.error.message,'Error');
+    });
     
   }
 
@@ -78,6 +116,8 @@ export interface PeriodicElement {
   symbol: string;
 }
 
+
+
 const ELEMENT_DATA: PeriodicElement[] = [
   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
@@ -100,3 +140,5 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
   {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
 ];
+
+

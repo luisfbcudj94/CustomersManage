@@ -23,7 +23,7 @@ import { ClientesComponent } from './components/clientes/clientes.component';
 import { MatTableModule } from '@angular/material/table'  
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatIconModule} from '@angular/material/icon';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule,MatDialogRef} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -55,9 +55,11 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    
+    
   ],
-  providers: [],
+  providers: [{provide:MatDialogRef , useValue:{} },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
