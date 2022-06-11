@@ -15,7 +15,7 @@
           <!-- Name Column -->
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Nombre cliente </th>
-            <td mat-cell *matCellDef="let element"> <a href="">{{element.nombre}}</a> </td>
+            <td mat-cell *matCellDef="let element"> <a [routerLink]="'detalle/'+element.nombreUsuario">{{element.nombre}}</a> </td>
           </ng-container>
 
           <ng-container matColumnDef="document">

@@ -1,0 +1,123 @@
+<div class="fondo">
+    <app-navbar></app-navbar>
+
+    <h1>Cliente {{id}}</h1>
+    <div class="container" >
+        <!--CARTA DETALLE CLIENTE-->
+        <mat-card class="example-card">
+            <div class="vehicle">
+                
+                <!-- Example single danger button -->
+                <div class="btn-group dropend">
+                    <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Vehículo
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-item">Carro1</li>
+                        <li class="dropdown-item">Carro2</li>
+                        <li class="dropdown-item">Carro3</li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li class="dropdown-item">Agregar vehículo</li>
+                    </ul>
+                </div>
+                <mat-icon id="edit">edit</mat-icon>
+                <mat-icon id="delete">delete</mat-icon>
+            </div>
+            
+            <mat-card-content class="contenido">
+
+                <div>
+                    <h4>Marca</h4>
+                    <p>Camaro</p>
+                </div>
+                <div>
+                    <h4>Placa</h4>
+                    <p>HTY329</p>
+                </div>
+                <div>
+                    <h4>Color</h4>
+                    <p>Verde</p>
+                </div>
+                <div>
+                    <h4>Modelo</h4>
+                    <p>2010</p>
+                </div>
+            
+            </mat-card-content>
+        </mat-card>
+
+        <!--STEPPER ETAPAS DEL MANTENIMIENTO-->
+        <mat-tab-group class="etapas">
+            <mat-tab label="Ingreso">
+                <div fxLayout="row" fxLayoutAlign="end">
+                    <mat-icon id="edit" (click)="isEditRevision()">edit</mat-icon>
+                </div>
+                
+                <p>El vehículo con placa HKJ123 ingresa al taller NOMBRETALLER presentando las siguientes fallas</p>
+                <h2>Estado del vehículo</h2>
+                <p *ngIf="!editRevision">{{revisionForm.value.revision}}</p>
+                <form [formGroup]="revisionForm" class="example-form" fxLayout="column" *ngIf="editRevision" (submit)="saveRevision()">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Leave a comment</mat-label>
+                      <textarea matInput formControlName="revision" placeholder="Escriba una descripcion..."></textarea>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" type="submit">Guardar</button>
+                </form>
+            </mat-tab>
+
+            <mat-tab label="Diagnostico">
+                <div fxLayout="row" fxLayoutAlign="end">
+                    <mat-icon id="edit" (click)="isEditDiagnostico()">edit</mat-icon>
+                </div>
+                
+                <p>Despues de realizar la revisión del vehículo con placas HRT678 se han identificado las siguientes fallas</p>
+                <h2>Descripción de la falla</h2>
+                <p *ngIf="!editDiagnostico">{{diagnosticoForm.value.diagnostico}}</p>
+                <form [formGroup]="diagnosticoForm" class="example-form" fxLayout="column" *ngIf="editDiagnostico" (submit)="saveDiagnostico()">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Leave a comment</mat-label>
+                      <textarea matInput formControlName="diagnostico" placeholder="Escriba una descripcion..."></textarea>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" type="submit">Guardar</button>
+                </form>
+            </mat-tab>
+
+
+            <mat-tab label="Reparación">
+                <div fxLayout="row" fxLayoutAlign="end">
+                    <mat-icon id="edit" (click)="isEditReparacion()">edit</mat-icon>
+                </div>
+                
+                <p>Al vehículo de placas HRT657 se le han realizado los siguientes ajustes.</p>
+                <h2>Mantenimiento realizado</h2>
+                <p *ngIf="!editReparacion">{{reparacionForm.value.reparacion}}</p>
+                <form [formGroup]="reparacionForm" class="example-form" fxLayout="column" *ngIf="editReparacion" (submit)="saveReparacion()">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Leave a comment</mat-label>
+                      <textarea matInput formControlName="reparacion" placeholder="Escriba una descripcion..."></textarea>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" type="submit">Guardar</button>
+                </form>
+            </mat-tab>
+
+            <mat-tab label="Terminado">
+                <div fxLayout="row" fxLayoutAlign="end">
+                    <mat-icon id="edit" (click)="isEditTerminado()">edit</mat-icon>
+                </div>
+                
+                <p>El vehículo con placas HRT456 se le entrega al cliente NOMBRE CLIENTE con las siguientes mejoras.</p>
+                <h2>Entrega del vehículo</h2>
+                <p *ngIf="!editTerminado">{{terminadoForm.value.terminado}}</p>
+                <form [formGroup]="terminadoForm" class="example-form" fxLayout="column" *ngIf="editTerminado" (submit)="saveTerminado()">
+                    <mat-form-field class="example-full-width" appearance="fill">
+                      <mat-label>Leave a comment</mat-label>
+                      <textarea matInput formControlName="terminado" placeholder="Escriba una descripcion..."></textarea>
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" type="submit">Guardar</button>
+                </form>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+
+  
+</div>
