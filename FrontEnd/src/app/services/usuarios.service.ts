@@ -28,5 +28,9 @@ export class UsuariosService {
     return this.http.get(`${this.myAppUrl+this.myApiUrl}?tallerId=${tallerId}`);
   }
 
+  getCustomerUser(user: string): Observable<any>{
+    return this.http.get(`${this.myAppUrl+this.myApiUrl+'/getCustomerUser'}?user=${user}`);
+  }
+
 }
 

@@ -15,9 +15,15 @@
     margin-left:90px;
 }
 
-.contenido{
+.contenido form{
     display: grid;
     grid-template-columns: 50% 50%;
+}
+
+.contenido form .btn-guardar{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: 95%;
 }
 
 h4{
@@ -66,4 +72,8 @@ ul li{
 #delete{
     color: rgb(216, 57, 57);
     cursor: pointer;
+}
+
+.width-50{
+    width: 90%;
 }

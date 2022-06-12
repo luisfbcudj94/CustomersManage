@@ -10,7 +10,7 @@ const routes: Routes = [
   {path:'login', component:LoginComponent},
   {path:'main', component:MainComponent},
   {path:'clientes', component:ClientesComponent},
-  {path:'clientes/detalle/:id',component:ClientesDetalleComponent},
+  {path:'clientes/detalle/:user',component:ClientesDetalleComponent},
   {path:'**', component: LoginComponent, pathMatch:'full'}
   
 ];

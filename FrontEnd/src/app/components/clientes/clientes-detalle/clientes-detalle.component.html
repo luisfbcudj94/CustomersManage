@@ -1,7 +1,6 @@
 <div class="fondo">
     <app-navbar></app-navbar>
-
-    <h1>Cliente {{id}}</h1>
+    <h1>Cliente {{nombreCustomer}}</h1>
     <div class="container" >
         <!--CARTA DETALLE CLIENTE-->
         <mat-card class="example-card">
@@ -13,35 +12,49 @@
                     Vehículo
                     </button>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-item">Carro1</li>
-                        <li class="dropdown-item">Carro2</li>
-                        <li class="dropdown-item">Carro3</li>
+                        <li class="dropdown-item" (click)="dropdown(vehicle)" *ngFor="let vehicle of vehiclesCustomer">{{vehicle.placa}}</li>
+                        
                         <li><hr class="dropdown-divider"></li>
-                        <li class="dropdown-item">Agregar vehículo</li>
+                        <li class="dropdown-item" (click)="addVehicle()">Agregar vehículo</li>
                     </ul>
                 </div>
-                <mat-icon id="edit">edit</mat-icon>
+                <mat-icon id="edit" (click)="editVehicleForm()">edit</mat-icon>
                 <mat-icon id="delete">delete</mat-icon>
             </div>
             
             <mat-card-content class="contenido">
-
-                <div>
-                    <h4>Marca</h4>
-                    <p>Camaro</p>
-                </div>
-                <div>
-                    <h4>Placa</h4>
-                    <p>HTY329</p>
-                </div>
-                <div>
-                    <h4>Color</h4>
-                    <p>Verde</p>
-                </div>
-                <div>
-                    <h4>Modelo</h4>
-                    <p>2010</p>
-                </div>
+                <form [formGroup]="vehiculoForm" (submit)="saveVehicle()">
+                    <div>
+                        <h4>Marca</h4>
+                        <p *ngIf="!editVehicle">{{showMarca}}</p>
+                        <mat-form-field class="width-50" appearance="fill" *ngIf="editVehicle">
+                            <input matInput formControlName="Marca" placeholder="Marca" autocomplete="off">
+                        </mat-form-field>
+                        
+                    </div>
+                    <div>
+                        <h4>Placa</h4>
+                        <p *ngIf="!editVehicle">{{showPlaca}}</p>
+                        <mat-form-field class="width-50" appearance="fill" *ngIf="editVehicle">
+                            <input matInput formControlName="Placa" placeholder="Placa" autocomplete="off">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <h4>Color</h4>
+                        <p *ngIf="!editVehicle">{{showColor}}</p>
+                        <mat-form-field class="width-50" appearance="fill" *ngIf="editVehicle">
+                            <input matInput formControlName="Color" placeholder="Color" autocomplete="off">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <h4>Modelo</h4>
+                        <p *ngIf="!editVehicle">{{showModelo}}</p>
+                        <mat-form-field class="width-50" appearance="fill" *ngIf="editVehicle">
+                            <input matInput formControlName="Modelo" placeholder="Modelo" autocomplete="off">
+                        </mat-form-field>
+                    </div>
+                    <button mat-raised-button type="submit" class="btn-guardar" color="primary" *ngIf="editVehicle">Guardar</button>
+                </form>
             
             </mat-card-content>
         </mat-card>
@@ -53,7 +66,7 @@
                     <mat-icon id="edit" (click)="isEditRevision()">edit</mat-icon>
                 </div>
                 
-                <p>El vehículo con placa HKJ123 ingresa al taller NOMBRETALLER presentando las siguientes fallas</p>
+                <p>El vehículo con placa {{showPlaca}} ingresa al taller NOMBRETALLER presentando las siguientes fallas</p>
                 <h2>Estado del vehículo</h2>
                 <p *ngIf="!editRevision">{{revisionForm.value.revision}}</p>
                 <form [formGroup]="revisionForm" class="example-form" fxLayout="column" *ngIf="editRevision" (submit)="saveRevision()">
@@ -70,7 +83,7 @@
                     <mat-icon id="edit" (click)="isEditDiagnostico()">edit</mat-icon>
                 </div>
                 
-                <p>Despues de realizar la revisión del vehículo con placas HRT678 se han identificado las siguientes fallas</p>
+                <p>Despues de realizar la revisión del vehículo con placas {{showPlaca}} se han identificado las siguientes fallas</p>
                 <h2>Descripción de la falla</h2>
                 <p *ngIf="!editDiagnostico">{{diagnosticoForm.value.diagnostico}}</p>
                 <form [formGroup]="diagnosticoForm" class="example-form" fxLayout="column" *ngIf="editDiagnostico" (submit)="saveDiagnostico()">
@@ -88,7 +101,7 @@
                     <mat-icon id="edit" (click)="isEditReparacion()">edit</mat-icon>
                 </div>
                 
-                <p>Al vehículo de placas HRT657 se le han realizado los siguientes ajustes.</p>
+                <p>Al vehículo de placas {{showPlaca}} se le han realizado los siguientes ajustes.</p>
                 <h2>Mantenimiento realizado</h2>
                 <p *ngIf="!editReparacion">{{reparacionForm.value.reparacion}}</p>
                 <form [formGroup]="reparacionForm" class="example-form" fxLayout="column" *ngIf="editReparacion" (submit)="saveReparacion()">
@@ -105,7 +118,7 @@
                     <mat-icon id="edit" (click)="isEditTerminado()">edit</mat-icon>
                 </div>
                 
-                <p>El vehículo con placas HRT456 se le entrega al cliente NOMBRE CLIENTE con las siguientes mejoras.</p>
+                <p>El vehículo con placas {{showPlaca}} se le entrega al cliente NOMBRE CLIENTE con las siguientes mejoras.</p>
                 <h2>Entrega del vehículo</h2>
                 <p *ngIf="!editTerminado">{{terminadoForm.value.terminado}}</p>
                 <form [formGroup]="terminadoForm" class="example-form" fxLayout="column" *ngIf="editTerminado" (submit)="saveTerminado()">

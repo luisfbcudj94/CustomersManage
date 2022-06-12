@@ -58,7 +58,7 @@ export class ClientesComponent implements OnInit {
   getData(){
     this.usuariosService.getCustomers(this.tallerId).subscribe(data => {
       this.customers = data;
-      console.log("customers:" ,this.customers[0]);
+      console.log("customers:" ,this.customers);
     },err => {
       console.log(err.error);
     });
@@ -71,6 +71,7 @@ export class ClientesComponent implements OnInit {
   agregarCliente(): void{
 
     const usuarioAdd:UsuarioAdd = {
+      id: 0,
       nombre: this.customer.value.name,
       documento: this.customer.value.document,
       nombreUsuario: this.customer.value.usuario,
