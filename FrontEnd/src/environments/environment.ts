@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  endpoint: 'http://localhost:56681'
+  //endpoint: 'http://localhost:56681'
+  endpoint: 'http://awsbackend.us-east-1.elasticbeanstalk.com'
 };
 
 /*
