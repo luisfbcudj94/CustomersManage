@@ -63,10 +63,10 @@ export class ClientesDetalleComponent implements OnInit {
     });
 
     this.vehiculoForm = this.fb.group({
-      Marca: ['',Validators.required],
-      Placa: ['',Validators.required],
-      Color: ['',Validators.required],
-      Modelo: ['',Validators.required]
+      Marca: ['',[Validators.required,Validators.maxLength(25)]],
+      Placa: ['',[Validators.required,Validators.maxLength(15)]],
+      Color: ['',[Validators.required,Validators.maxLength(25)]],
+      Modelo: ['',[Validators.required,Validators.maxLength(25)]]
     });
   }
 
@@ -92,11 +92,15 @@ export class ClientesDetalleComponent implements OnInit {
     this.vehicleService.getVehiclesId(this.idCustomer).subscribe(data => {
       this.vehiclesCustomer = data;
       console.log(this.vehiclesCustomer)
+
+      if(this.vehiclesCustomer.length > 0){
+        
+        this.showPlaca = this.vehiclesCustomer[0].placa;
+        this.showModelo = this.vehiclesCustomer[0].modelo;
+        this.showMarca = this.vehiclesCustomer[0].marca;
+        this.showColor = this.vehiclesCustomer[0].color;
+      }
       
-      this.showColor = this.vehiclesCustomer[0].color;
-      this.showPlaca = this.vehiclesCustomer[0].placa;
-      this.showModelo = this.vehiclesCustomer[0].modelo;
-      this.showMarca = this.vehiclesCustomer[0].marca;
     }, err => {
       console.log(err.error.message);
     })
@@ -171,28 +175,34 @@ export class ClientesDetalleComponent implements OnInit {
   }
 
   saveVehicle(){
-
-    const vehicle:Vehicle = {
-      userId: this.customer[0].id,
-      mantenimientoId: 1,
-      marca: this.vehiculoForm.value.Marca,
-      placa: this.vehiculoForm.value.Placa,
-      color: this.vehiculoForm.value.Color,
-      modelo: this.vehiculoForm.value.Modelo
-    };
-
-    if(this.vehiculoForm.invalid == false){
-      console.log("entre al if");
-      this.vehicleService.saveVehicle(vehicle).subscribe(data => {
-        console.log(data);
-      }, err => {
-        console.log(err.error.message);
-      })
-
-      this.editVehicle = false;
-      this.vehiculoForm.reset();
-      window.location.reload();
+    try{
+      const vehicle:Vehicle = {
+        userId: this.customer[0].id,
+        mantenimientoId: 1,
+        marca: this.vehiculoForm.value.Marca,
+        placa: this.vehiculoForm.value.Placa,
+        color: this.vehiculoForm.value.Color,
+        modelo: this.vehiculoForm.value.Modelo
+      };
+  
+      if(this.vehiculoForm.invalid == false){
+        console.log("entre al if");
+        this.vehicleService.saveVehicle(vehicle).subscribe(data => {
+          console.log(data);
+          this.editVehicle = false;
+          this.vehiculoForm.reset();
+          window.location.reload();
+        }, err => {
+          console.log(err.error.message);
+        })
+  
+        
+      }
     }
+    catch{
+      console.log("hay error");
+    }
+
     
   }
 

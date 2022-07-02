@@ -22,18 +22,30 @@
     background-color: black;
     background-repeat:repeat; 
     opacity: 0.5;
+    position: relative !important;
+    right: 0 !important;
+    left: 0 !important;
+    padding: 0px !important;
 }   
 
 #dos{
     background-color: black;
     background-repeat:repeat; 
     opacity: 0.5;
+    position: relative !important;
+    right: 0 !important;
+    left: 0 !important;
+    padding: 0px !important;
 }
 
 #tres{
     background-color: black;
     background-repeat:repeat; 
     opacity: 0.5;
+    position: relative !important;
+    right: 0 !important;
+    left: 0 !important;
+    padding: 0px !important;
 }
 
 .carousel-item h1,p{
